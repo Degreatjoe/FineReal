@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block nav_links %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+<ul>
+    <li><a href="{{url_for('teacher_dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+    <li><a href="{{url_for('course')}}"><i class="fas fa-book"></i> Courses</a></li>
+    <li><a href="#"><i class="fas fa-users"></i> Students</a></li>
+    <li><a href="#"><i class="fas fa-file-alt"></i> Assignments</a></li>
+    <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
+    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<section id="analytics" class="analytics_card">
+    <h2>Analytics Report</h2>
+    <div>
+    </div>
+</section>
+<section id="draft" class="courses">
+    <h2> Courses in Draft</h2>
+    {% if d_courses %}
+    <ul>
+        {% for course in d_courses %}
+            <li>
+                <strong>{{ course.title }}</strong><br>
+                <em>{{ course.description }}</em><br>
+                Status: {{ course.status }}<br>
+                <a href="#">Edit Course</a>
+            </li>
+        {% endfor %}
+    </ul>
+        {% else %}
+            <p>No draft courses found.</p>
+        {% endif %}
+</section>
+{% endblock %}

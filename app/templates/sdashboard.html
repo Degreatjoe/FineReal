@@ -1,0 +1,35 @@
+{% extend 'base.html' %}
+
+{% block nav-links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+<ul>
+    <li><a href="{{url_for('student_dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+    <li><a href="{{url_for('course')}}"><i class="fas fa-book"></i> Courses</a></li>
+    <li><a href="#"><i class="fas fa-users"></i> Students</a></li>
+    <li><a href="#"><i class="fas fa-file-alt"></i> Assignments</a></li>
+    <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
+    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="heading">
+    <h1>Welcome, {{ user.last_name }}!</h1>
+</div>
+<section class="courses">
+    {% for course in courses %}
+        <div class="course-card">
+            <h3>{{ course.title }}</h3>
+            <p>{{ course.description }}</p>
+            <div class="course-card-footer">
+                <span>Last created on: {{ course.created_at }}</span>
+                <a href="#"> Enroll </a>
+            </div>
+        </div>
+    {% else %}
+        <p>No courses available. Click "Create Course" to get started!</p>
+    {% endfor %}
+    </section>
+{% endblock %}

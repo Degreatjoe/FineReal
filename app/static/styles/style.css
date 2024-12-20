@@ -1,0 +1,298 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+main {
+    margin-top: 70px;
+    padding: 20px;
+    flex-grow: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow-y: auto;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.right-links a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+}
+
+.menu-btn {
+    display: none; /* Hide menu button by default */
+    flex-direction: column;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.menu-btn div {
+    width: 30px;
+    height: 3px;
+    background-color: #333;
+    margin: 4px 0;
+}
+
+/* Navigation handler */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 20px;
+    display: block; /* Show sidebar by default */
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar-nav ul {
+    margin-top: 120px;
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-nav ul li {
+    margin: 15px 0;
+}
+
+.sidebar-nav ul li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-nav ul li a:hover {
+    color: #3498db;
+}
+
+.sidebar-nav ul li a i {
+    margin-right: 10px;
+}
+
+/* Main content styling */
+footer {
+    background-color: #f8f8f8;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid #ddd;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.footer-links a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #333;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #777;
+}
+
+/* User info modal styling */
+.user_info {
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    width: 300px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    display: none;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.user_info .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.user_info .close-btn:hover {
+    color: #333;
+}
+
+/* Profile header section */
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.user-avatar-large {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.user-greeting {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.user-email {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Profile links */
+.profile-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-links a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #1a73e8;
+    margin: 5px 0;
+    transition: color 0.3s ease;
+}
+
+.profile-links a:hover {
+    color: #0c47b8;
+}
+/* Styles for the user avatar and modal */
+/* .user-avatar {
+    cursor: pointer;
+    border-radius: 50%;
+}
+*/
+.modal {
+    display: none; 
+    position: fixed;
+    margin-top: 80px;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); 
+    overflow: auto; 
+}
+/*
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.user-info {
+    text-align: center;
+}
+
+.user-info img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+
+.user-info a {
+    display: block;
+    margin-top: 10px;
+    color: #3498db;
+    text-decoration: none;
+}
+
+.user-info a:hover {
+    text-decoration: underline;
+} */
+
+
+
+@media (max-width: 768px) {
+    /* Hide the sidebar on mobile by default */
+    .sidebar {
+        display: none;
+        width: 40%;
+    }
+
+    /* Show the hamburger menu */
+    .menu-btn {
+        margin-top: 90px;
+        display: flex;
+    }
+
+    /* Adjust main content for smaller screens */
+    main {
+        margin-top: 0; /* No need for space for the fixed header */
+        padding: 20px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Show the sidebar when it's toggled on mobile */
+.sidebar.active {
+    display: block;
+}
+

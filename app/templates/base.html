@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Index Page</title>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="{{ url_for('index') }}" aria-label="Home">
+                <img src="{{ url_for('static', filename='images/Finerealpng.png') }}" alt="FineReal Logo">
+            </a>
+        </div>
+
+<!-- Profile on the right -->
+<div class="right-links">
+    <div class="user" onclick="extend()">
+        <img src="https://via.placeholder.com/40" alt="User Avatar" class="user-avatar">
+    </div>
+</div>
+
+<div id="user_info" class="user_info">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <div class="profile-header">
+        <img src="https://via.placeholder.com/80" alt="User Avatar" class="user-avatar-large">
+        <h3 class="user-greeting">Hi, {{ user.username | capitalize }}!</h3>
+        <p class="user-email">{{ user.email }}</p>
+    </div>
+    <div class="profile-links">
+        <a href="{{ url_for('Profile', user_id=current_user.id) }}" class="profile-link">Manage your Profile</a>
+        <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+    </div>
+</div>
+    </header>
+
+    <!-- Hamburger Menu Button -->
+    <div class="menu-btn" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- Left Navigation Links -->
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                {% block nav_links %}
+                <!-- <ul>
+                    <li><a href="{{url_for('teacher_dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="{{url_for('course')}}"><i class="fas fa-book"></i> Courses</a></li>
+                    <li><a href="#"><i class="fas fa-users"></i> Students</a></li>
+                    <li><a href="#"><i class="fas fa-file-alt"></i> Assignments</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul> -->
+                {% endblock %}
+            </nav>
+        </aside>
+        <main class="main-content">
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 FineReal. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="{{ url_for('static', filename='script/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

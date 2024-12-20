@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+    <title>Index Page</title>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="{{ url_for('index') }}" aria-label="Home">
+                <img src="{{ url_for('static', filename='images/Finerealpng.png') }}" alt="Chronos Logo">
+            </a>
+        </div>
+
+        <!-- Sign Up and Login Links on the right -->
+        <div class="right-links">
+            <a href="{{url_for('signup')}}">Sign Up</a>
+            <a href="{{url_for('login')}}">Login</a>
+        </div>
+    </header>
+
+    <main>
+        <h1>Welcome to FineReal E-Learning Platform</h1>
+        <p>Your gateway to a world of knowledge and skills. At FineReal, we provide a comprehensive e-learning experience designed to help you learn at your own pace, anytime and anywhere.</p>
+
+        <section class="features">
+            <h2>Features of FineReal</h2>
+            <ul>
+                <li><strong>Interactive Courses:</strong> Engage with interactive lessons that make learning fun and effective.</li>
+                <li><strong>Expert Instructors:</strong> Learn from industry professionals and experienced educators.</li>
+                <li><strong>Flexible Learning:</strong> Access courses on your schedule, whether at home or on the go.</li>
+                <li><strong>Community Support:</strong> Join a community of learners and get support from peers and instructors.</li>
+                <li><strong>Certification:</strong> Earn certificates upon course completion to showcase your skills.</li>
+            </ul>
+        </section>
+
+        <section class="call-to-action">
+            <h2>Get Started Today!</h2>
+            <p>Join thousands of learners who are enhancing their skills with FineReal. Sign up now to explore our courses and start your learning journey!</p>
+            <a href="{{url_for('signup')}}" class="cta-button">Sign Up Now</a>
+        </section>
+        <section class="courses">
+            {% for course in courses %}
+                <div class="course-card">
+                    <h3>{{ course.title }}</h3>
+                    <p>{{ course.description }}</p>
+                    <span>Teacher: {{ course.teacher_id }}</span>
+                    <div class="course-card-footer">
+                        <span>created on: {{ course.created_at }}</span>
+                        <a href="#"> Enroll </a>
+                    </div>
+                </div>
+            {% else %}
+                <p>No courses available. Click "Create Course" to get started!</p>
+            {% endfor %}
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 FineReal. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="{{ url_for('static', filename='script/script.js') }}"></script>
+</body>
+</html>

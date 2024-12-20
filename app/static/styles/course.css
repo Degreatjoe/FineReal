@@ -1,0 +1,237 @@
+/* Modal Background */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000; /* Ensures the modal appears on top of other content */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    overflow: auto;
+    padding-left: 20%;
+    padding-top: 20px;
+}
+
+/* Modal Content Box */
+.modal_content {
+    background-color: #fff;
+    padding: 20px;
+    width: 500px;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    max-height: 80vh; /* Limit height */
+    overflow-y: auto; /* Allows scrolling when content overflows */
+    animation: fadeIn 0.3s ease-in-out; /* Simple fade-in effect */
+}
+
+/* manage button */
+.manage-btn {
+    /* position: absolute; */
+    background-color: gray; /* Red */
+    right: 0.5px; /* Move to the right of the modal */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.manage-btn:hover {
+    background-color: darkgray;
+}
+
+
+/* open button */
+.open-btn {
+    /* position: absolute; */
+    background-color: gray; /* Red */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px;
+}
+
+.open-btn:hover {
+    background-color: darkgray;
+}
+
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Move to the right of the modal */
+    background-color: gray; /* Red */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    background-color: darkgray;
+}
+
+/* Form Labels */
+.form-label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+    font-size: 14px;
+}
+
+/* Input, Textarea, and Select fields */
+.form-control, .form-select {
+    width: 100%;
+    padding: 8px 12px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Textarea specific styles */
+textarea.form-control {
+    resize: vertical; /* Allow vertical resizing */
+}
+
+/* Buttons */
+.form-btn, .btn-primary {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.form-btn:hover, .btn-primary:hover {
+    background-color: #45a049;
+}
+
+/* Select options */
+select.form-select {
+    padding: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+/* the courses section */
+.courses {
+    margin-top: 0; /* Space above the courses section */
+}
+.courses h1{
+    padding: 5px;
+    background-color: #2c3e50;
+    color: white;
+}
+/* #536d86 */
+.course-card {
+    background-color: #f9f9f9; /* Light background for cards */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside the card */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.2s; /* Smooth transition for hover effect */
+}
+
+.courses .draft-grid,
+.courses .published-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    overflow-y: auto;
+    max-height: 250px;
+}
+
+.course-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+}
+
+.course-card h3 {
+    color: #333; /* Dark color for the title */
+    margin-bottom: 10px; /* Space below the title */
+}
+
+.course-card p {
+    color: #666; /* Lighter color for the description */
+    margin-bottom: 15px; /* Space below the description */
+}
+
+.course-card-footer {
+    display: flex; /* Flexbox for footer layout */
+    justify-content: space-between; /* Space between elements */
+    align-items: center; /* Center items vertically */
+}
+
+.course-card-footer span {
+    font-size: 14px; /* Smaller font size for date */
+    color: #999; /* Gray color for the date */
+}
+
+.course-card-footer a {
+    background-color: #007BFF; /* Button color */
+    color: #fff; /* Text color */
+    padding: 8px 12px; /* Padding for the button */
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+.course-card-footer a:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+
+
+/* Responsive Modal */
+@media screen and (max-width: 600px) {
+    .modal_content {
+        width: 90%;
+    }
+
+    .form-btn, .btn-primary {
+        font-size: 14px;
+    }
+    .courses .draft-grid,
+    .courses .published-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ensure grid layout for smaller screens */
+        gap: 5px; /* Reduced gap on smaller screens */
+        max-height: 250px;
+    }
+}
+
+/* Modal fade-in animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+

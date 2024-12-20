@@ -1,0 +1,248 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width:auto;
+    font-family: Arial, sans-serif;
+    
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+    position: fixed; /* Make the header fixed */
+    top: 0; /* Position it at the top */
+    left: 0; /* Align it to the left */
+    right: 0; /* Align it to the right */
+    z-index: 1000; /* Ensure it stays above other content */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better visibility */
+}
+
+main {
+    margin-top: 70px; /* Add margin to the top to prevent overlap with the fixed header */
+    padding: 20px;
+    flex-grow: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.features, .call-to-action {
+    margin-top: 20px; /* Space between sections */
+}
+
+h2 {
+    color: #333; /* Darker color for section headings */
+    margin-bottom: 10px; /* Space below headings */
+}
+
+ul {
+    list-style-type: disc; /* Bullet points for the list */
+    margin-left: 20px; /* Indent the list */
+}
+
+.cta-button {
+    display: inline-block; /* Make the link look like a button */
+    padding: 10px 20px; /* Padding for the button */
+    background-color: #007BFF; /* Button color */
+    color: #fff; /* Text color */
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px; /* Rounded corners */
+    margin-top: 10px; /* Space above the button */
+}
+
+.cta-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+.logo img {
+    height: 50px;
+}
+
+.right-links a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+}
+
+.menu-btn {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.menu-btn div {
+    width: 30px;
+    height: 3px;
+    background-color: #333;
+    margin: 4px 0;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f8f8f8;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 200px;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #333;
+    margin: 10px 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+/* main {
+    margin-left: 220px; /* Space for the navbar */
+    /* padding: 20px;
+    flex-grow: 1;
+} */
+
+footer {
+    background-color: #f8f8f8;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid #ddd;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.footer-links a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #333;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #777;
+}
+
+
+/* the courses section */
+.courses {
+    display: grid; /* Use CSS Grid for layout */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid with a minimum width */
+    gap: 20px; /* Space between grid items */
+    margin-top: 20px; /* Space above the courses section */
+}
+
+.course-card {
+    background-color: #f9f9f9; /* Light background for cards */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside the card */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.2s; /* Smooth transition for hover effect */
+}
+
+.course-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+}
+
+.course-card h3 {
+    color: #333; /* Dark color for the title */
+    margin-bottom: 10px; /* Space below the title */
+}
+
+.course-card p {
+    color: #666; /* Lighter color for the description */
+    margin-bottom: 15px; /* Space below the description */
+}
+
+.course-card-footer {
+    display: flex; /* Flexbox for footer layout */
+    justify-content: space-between; /* Space between elements */
+    align-items: center; /* Center items vertically */
+}
+
+.course-card-footer span {
+    font-size: 14px; /* Smaller font size for date */
+    color: #999; /* Gray color for the date */
+}
+
+.course-card-footer a {
+    background-color: #007BFF; /* Button color */
+    color: #fff; /* Text color */
+    padding: 8px 12px; /* Padding for the button */
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+.course-card-footer a:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+@media (max-width: 768px) {
+    /* .navbar {
+        margin-top: 80px;
+        width: 50%;
+        max-height: 500px;
+        height: 70%;
+        position: absolute;
+        transform: translateX(-100%);
+    }
+
+    .menu-btn {
+        margin-top: 80px;
+        display: flex;
+    } */
+
+    /* main {
+        width: 780px;
+        margin-top: 0;
+        margin-left: 0; /* No space for navbar on mobile 
+    } */
+
+    main {
+        margin-top: 70px; /* Space for the fixed header */
+        padding: 20px;
+        max-width: 780px; /* Maximum width of the content */
+        width: 100%; /* Allow it to take full width */
+        margin-left: auto; /* Center the content */
+        margin-right: auto; /* Center the content */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better visibility */
+    }
+
+    .courses {
+        display: grid; /* Use CSS Grid for layout */
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid with a minimum width */
+        gap: 5px; /* Space between grid items */
+        margin-top: 5px; /* Space above the courses section */
+    }
+    
+}

@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block nav_links %}
+<!-- Font Awesome CDN link -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+<ul>
+    <li><a href="{{url_for('teacher_dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+    <li><a href="{{url_for('course')}}"><i class="fas fa-book"></i> Courses</a></li>
+    <li><a href="#"><i class="fas fa-users"></i> Students</a></li>
+    <li><a href="#"><i class="fas fa-file-alt"></i> Assignments</a></li>
+    <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
+    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/course.css') }}">
+
+<button onclick="openModal()" class="open-btn">&plus;</button>
+<button onclick="" class="manage-btn">&Congruent;</button>
+
+<section class="courses">
+    <div>
+        <h1>Your Draft Courses</h1>
+        <div class="draft-grid">
+            {% if d_courses %}
+    
+                {% for course in d_courses %}
+                <div class="course-card">
+                    <h3>{{ course.title }}</h3>
+                    <p>{{ course.description }}</p>
+                    <p>Status: {{course.status}}</p>
+                    <div class="course-card-footer">
+                        <span>Last created on: {{ course.created_at }}</span>
+                        <a href="#"> Enroll </a>
+                    </div>
+                </div>
+                {% endfor %}
+    
+            {% else %}
+                <p>No draft courses found.</p>
+            {% endif %}
+    
+        </div>    
+    </div>
+
+    <div>
+        <h1>Your Published Courses</h1>
+        <div class="published-grid">
+            {% if p_courses %}
+                
+                {% for course in p_courses %}
+                <div class="course-card">
+                    <h3>{{ course.title }}</h3>
+                    <p>{{ course.description }}</p>
+                    <p>Status: {{course.status}}</p>
+                    <div class="course-card-footer">
+                        <span>Last created on: {{ course.created_at }}</span>
+                        <a href="#"> Enroll </a>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            {% else %}
+                <p>You haven't published any course yet.</p>
+            {% endif %}
+        </div>        
+    </div>
+</section>
+<section class="modal">
+    <div class="modal_content">
+        <button type="button" onclick="closeCourse()" class="close-btn">&times;</button>
+        <form action="{{ url_for('create_course') }}" method="POST">
+            <label for="title" class="form-label">Course Title</label>
+            <input type="text" id="title" name="title" required placeholder="Enter the course title">
+
+            <label for="description" class="form-label">Course Description</label>
+            <textarea class="form-control" id="description" name="description" rows="10" required placeholder="Enter a brief description of the course"></textarea>
+
+            <label for="category" class="form-label">Category</label>
+            <input type="text" class="form-control" id="category" name="category" placeholder="Enter the course category (optional)">
+
+            <label for="difficulty" class="form-label">Difficulty Level</label>
+            <select class="form-select" id="difficulty" name="difficulty">
+                <option value="Beginner" selected>Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+            </select>
+
+            <label for="prerequisite" class="form-label">Prerequisite Knowledge</label>
+            <textarea class="form-control" id="prerequisite" name="prerequisite" rows="5" placeholder="Enter any prerequisite knowledge (optional)"></textarea>
+
+            <label for="status" class="form-label">Course Status</label>
+            <select class="form-select" id="status" name="status">
+                <option value="Draft" selected>Draft</option>
+                <option value="Published">Published</option>
+                <option value="Archived">Archived</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary form-btn">Create Course</button>
+        </form>
+    </div>
+</section>
+
+<script src="{{ url_for('static', filename='script/course.js') }}"></script>
+{% endblock %}
