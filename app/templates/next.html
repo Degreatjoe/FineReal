@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #007BFF;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .note {
+            color: #e63946;
+            font-weight: bold;
+        }
+
+        .footer {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Account Creation in Progress</h1>
+        <p>
+            Congratulations! Your account creation request has been received, and a verification email has been sent to the address you provided.
+        </p>
+        <p>
+            Please check your inbox and confirm your account creation to complete the process.
+        </p>
+        <p class="note">
+            NOTE: You have 24 hours to verify your account. If you do not verify your account within this period, the information you provided during account creation will be deleted, and you will need to re-register.
+        </p>
+        <a href="{{url_for('login')}}">Login</a>
+        <div class="footer">
+            Thank you for signing up!
+        </div>
+    </div>
+</body>
+</html>
