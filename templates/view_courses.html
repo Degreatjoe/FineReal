@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Courses</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>E-Learning Platform</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('view_courses') }}">Courses</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Available Courses</h2>
+        <ul>
+            {% for row in rows %}
+                <li>{{ row['title'] }}: {{ row['description'] }}</li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Courses</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>E-Learning Platform</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('view_courses') }}">Courses</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Available Courses</h2>
+        <ul>
+            {% for row in rows %}
+                <li>{{ row['title'] }}: {{ row['description'] }}</li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>
+
