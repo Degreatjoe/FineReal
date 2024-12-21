@@ -45,3 +45,22 @@ def course():
                            d_courses= d_courses,
                            p_courses=p_course,
                            courses= courses)
+
+@app.route('/course/<course_id>', methods=["GET", "POST"])
+@login_required
+def course_view( course_id):
+    if request.method == "POST":
+        title = request.form.get("title")
+        course_id = course_id
+        new_module = Module(title = title, course_id=course_id)
+        db.session.add(new_module)
+        db.session.commit()
+        return redirect(url_for('course_view', course_id=course_id))
+
+    v_course =  Course.query.get(course_id)
+    modules= get_module(course_id=course_id)
+    return render_template("course_view.html", course=v_course, user=current_user, modules= modules)
+
+@app.route('/<course_id>/models/', methods=["GET", "POST"])
+def model_view():
+    pass

@@ -32,3 +32,11 @@ def draft_course():
         # Query for courses with status 'draft' taught by the current user
         courses = Course.query.filter_by(teacher_id=current_user.id, status='Draft').all()
         return courses
+
+
+def get_module(course_id):
+    modules = Module.query.filter_by(course_id=course_id).all()
+    return modules
+
+def get_unit(module_id):
+    units = Unit.query.filter_by(module_id=module_id)

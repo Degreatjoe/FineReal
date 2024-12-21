@@ -45,7 +45,7 @@
                     <p>Status: {{course.status}}</p>
                     <div class="course-card-footer">
                         <span>Last created on: {{ course.created_at }}</span>
-                        <a href="#"> Enroll </a>
+                        <a href="{{url_for('course_view', course_id=course.id)}}"> edit </a>
                     </div>
                 </div>
                 {% endfor %}
@@ -63,13 +63,13 @@
             {% if p_courses %}
                 
                 {% for course in p_courses %}
-                <div class="course-card">
+                <div class="course-card" id="course-{{ course.id }}">
                     <h3>{{ course.title }}</h3>
                     <p>{{ course.description }}</p>
                     <p>Status: {{course.status}}</p>
                     <div class="course-card-footer">
                         <span>Last created on: {{ course.created_at }}</span>
-                        <a href="#"> Enroll </a>
+                        <a href="{{url_for('course_view', course_id=course.id)}}"> edit </a>
                     </div>
                 </div>
                 {% endfor %}

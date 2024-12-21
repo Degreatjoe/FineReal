@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block nav_links %}
+<!-- Font Awesome CDN link -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+{% if user.role == "Teacher" %}
+<ul>
+    <li><a href="{{url_for('teacher_dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+    <li><a href="{{url_for('course')}}"><i class="fas fa-book"></i> Courses</a></li>
+    <li><a href="#"><i class="fas fa-users"></i> Students</a></li>
+    <li><a href="#"><i class="fas fa-file-alt"></i> Assignments</a></li>
+    <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
+    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+</ul>
+{% else %}
+<ul>
+    <li><a href="{{url_for('student_dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+    <li><a href="{{url_for('course')}}"><i class="fas fa-book"></i> Courses</a></li>
+    <li><a href="#"><i class="fas fa-users"></i> Students</a></li>
+    <li><a href="#"><i class="fas fa-file-alt"></i> Assignments</a></li>
+    <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
+    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/course.css') }}">
+
+{% if user.role == "Teacher" %}
+<h1> {{ course.title }}</h1>
+
+<button class="tablink" onclick="openPage('Home', this, 'darkgoldenrod')" id="defaultOpen">Manage</button>
+<button class="tablink" onclick="openPage('News', this, 'darkgoldenrod')">Settings</button>
+<button onclick="openModal()" class="open-btn">&plus;</button>
+
+<div id="Home" class="tabcontent">
+    {% if modules %}
+                
+    {% for module in modules %}
+    <div class="module-card">
+        <h3>{{ module.title }}</h3>
+        <a href="{{url_for('course_view', course_id=course.id)}}"> edit </a>
+    </div>
+    {% endfor %}
+    
+{% else %}
+    <p>You can add modules by clicking on the plus icon above.</p>
+{% endif %}
+        
+</div>
+
+<div id="News" class="tabcontent">
+  <h3>News</h3>
+  <p>Some news this fine day!</p>
+</div>
+
+<section class="modal">
+    <div class="modal_content">
+        <button type="button" onclick="closeCourse()" class="close-btn">&times;</button>
+        <form action="{{url_for('course_view', course_id=course.id)}}" method="POST">
+            <label for="title" class="form-label">Course Title</label>
+            <input type="text" id="title" name="title" required placeholder="Enter the module title">
+
+            <button type="submit" class="btn btn-primary form-btn">New Model</button>
+        </form>
+    </div>
+</section>
+
+{% else %}
+{% endif %}
+<script src="{{ url_for('static', filename='script/course.js') }}"></script>
+{% endblock %}
