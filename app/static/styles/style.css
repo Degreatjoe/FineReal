@@ -21,6 +21,11 @@ header {
     z-index: 1000;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+header .left{
+    display: flex;
+    justify-content: space-between;
+    max-width: min-content;
+}
 
 main {
     margin-top: 70px;
@@ -218,53 +223,6 @@ footer {
     background-color: rgba(0, 0, 0, 0.4); 
     overflow: auto; 
 }
-/*
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; 
-    max-width: 500px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-}
-
-.close-btn {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close-btn:hover,
-.close-btn:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.user-info {
-    text-align: center;
-}
-
-.user-info img {
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-}
-
-.user-info a {
-    display: block;
-    margin-top: 10px;
-    color: #3498db;
-    text-decoration: none;
-}
-
-.user-info a:hover {
-    text-decoration: underline;
-} */
-
 
 
 @media (max-width: 768px) {
@@ -276,13 +234,13 @@ footer {
 
     /* Show the hamburger menu */
     .menu-btn {
-        margin-top: 90px;
+        /* margin-top: 90px; */
         display: flex;
     }
 
     /* Adjust main content for smaller screens */
     main {
-        margin-top: 0; /* No need for space for the fixed header */
+        margin-top: 70px; /* No need for space for the fixed header */
         padding: 20px;
         width: 100%;
         margin-left: auto;

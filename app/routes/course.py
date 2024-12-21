@@ -10,20 +10,9 @@ from app.models.course import *
 from app.utils.course import *
 
 
-@app.route('/course')
+@app.route('/course', methods=['GET', 'POST'])
 @login_required
 def course():
-    d_courses= draft_course()
-    p_course = published_course()
-    courses= index_course()
-    return render_template('course.html',
-                           user=current_user,
-                           d_courses= d_courses,
-                           p_courses=p_course,
-                           courses= courses)
-
-@app.route('/create-course', methods=['GET', 'POST'])
-def create_course():
     if request.method == 'POST':
         title = request.form['title']
         description = request.form['description']
@@ -48,5 +37,11 @@ def create_course():
 
         return redirect(url_for('course'))  # Redirect to the courses page
 
-    teachers = User.query.filter_by(role="Teacher").all()  # Fetch all teachers to populate the dropdown
-    return render_template('course_form.html', teachers=teachers, user=current_user)
+    d_courses= draft_course()
+    p_course = published_course()
+    courses= index_course()
+    return render_template('course.html',
+                           user=current_user,
+                           d_courses= d_courses,
+                           p_courses=p_course,
+                           courses= courses)

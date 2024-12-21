@@ -10,12 +10,20 @@
 <body>
 
     <header>
-        <div class="logo">
-            <a href="{{ url_for('index') }}" aria-label="Home">
-                <img src="{{ url_for('static', filename='images/Finerealpng.png') }}" alt="FineReal Logo">
-            </a>
-        </div>
+        <div class="left">
+            <!-- Hamburger Menu Button -->
+            <div class="menu-btn" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
 
+            <div class="logo">
+                <a href="{{ url_for('index') }}" aria-label="Home">
+                    <img src="{{ url_for('static', filename='images/Finerealpng.png') }}" alt="FineReal Logo">
+                </a>
+            </div>
+        </div>
 <!-- Profile on the right -->
 <div class="right-links">
     <div class="user" onclick="extend()">
@@ -36,13 +44,6 @@
     </div>
 </div>
     </header>
-
-    <!-- Hamburger Menu Button -->
-    <div class="menu-btn" onclick="toggleMenu()">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
 
     <!-- Left Navigation Links -->
     <div class="container">
