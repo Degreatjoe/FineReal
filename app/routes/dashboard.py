@@ -30,16 +30,6 @@ def students():
     ]
     return render_template('students.html', students=students_list)
 
-# @app.route('/course')
-# @login_required
-# def course():
-#     if current_user.role == 'Teacher':
-#         courses = current_user.courses_taught
-#     else:
-#         courses= current_user.enrolled_courses
-
-#     return render_template("course.html", courses=courses, user=current_user)
-
 @app.route('/assignments')
 def assignments():
     """
@@ -75,6 +65,11 @@ def settings():
 # Add more routes as needed for additional 
 
 
-app.route('/dashboard/student')
+@app.route('/dashboard/student')
+@login_required
 def student_dashboard():
-    return render_template('sdashboard.html', user=current_user)
+    """
+    this returns the student dashboard
+    """
+    p_courses = index_course()
+    return render_template('sdashboard.html', user=current_user, p_courses= p_courses)

@@ -15,7 +15,12 @@ from app.utils.course import *
 def course():
     d_courses= draft_course()
     p_course = published_course()
-    return render_template('course.html', user=current_user, d_courses= d_courses, p_courses=p_course)
+    courses= index_course()
+    return render_template('course.html',
+                           user=current_user,
+                           d_courses= d_courses,
+                           p_courses=p_course,
+                           courses= courses)
 
 @app.route('/create-course', methods=['GET', 'POST'])
 def create_course():

@@ -31,7 +31,7 @@ def index():
 @login_required
 def dashboard():
     if current_user.role == 'Student':
-        return redirect(url_for('studennt_dashboard'))
+        return redirect(url_for('student_dashboard'))
     else:
         return redirect(url_for("teacher_dashboard"))
 
@@ -147,10 +147,7 @@ def login():
                 flash('Please verify your email before logging in.')
                 return redirect(url_for('login'))
             login_user(user)
-            if user.role == 'Teacher':
-                return redirect(url_for('teacher_dashboard'))
-            else:
-                return "Not yet implemented"
+            return redirect(url_for('dashboard'))
         elif not user:
             flash('User does not exist. Please sign up.')
             return redirect(url_for('signup'))

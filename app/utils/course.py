@@ -10,17 +10,8 @@ from app.models.course import *
 
 
 def index_course():
-    if current_user.is_authenticated:  # Check if the user is logged in
-        if current_user.role == 'Teacher':
-            # Get courses taught by the teacher, filter by 'Published' status
-            courses = current_user.courses_taught
-        else:
-            # Get courses the user is enrolled in, filter by 'Published' status
-            courses = current_user.enrolled_courses
-    else:
-        # If the user is not logged in, return all published courses
-        courses = Course.query.filter_by(status="Published").all()
-        
+    # If the user is not logged in, return all published courses
+    courses = Course.query.filter_by(status="Published").all()
     return courses
 
 def published_course():

@@ -4,6 +4,7 @@
 <!-- Font Awesome CDN link -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
+{% if user.role == "Teacher" %}
 <ul>
     <li><a href="{{url_for('teacher_dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
     <li><a href="{{url_for('course')}}"><i class="fas fa-book"></i> Courses</a></li>
@@ -12,11 +13,22 @@
     <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
     <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
 </ul>
+{% else %}
+<ul>
+    <li><a href="{{url_for('student_dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+    <li><a href="{{url_for('course')}}"><i class="fas fa-book"></i> Courses</a></li>
+    <li><a href="#"><i class="fas fa-users"></i> Students</a></li>
+    <li><a href="#"><i class="fas fa-file-alt"></i> Assignments</a></li>
+    <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
+    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+</ul>
+{% endif %}
 {% endblock %}
 
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/course.css') }}">
 
+{% if user.role == 'Teacher' %}
 <button onclick="openModal()" class="open-btn">&plus;</button>
 <button onclick="" class="manage-btn">&Congruent;</button>
 
@@ -102,6 +114,29 @@
         </form>
     </div>
 </section>
-
+{% else %}
+<div>
+    <h1>Available Courses</h1>
+    <div class="published-grid">
+        {% if courses %}
+            
+            {% for course in courses %}
+            <div class="course-card">
+                <h3>{{ course.title }}</h3>
+                <p>{{ course.description }}</p>
+                <p>Status: {{course.status}}</p>
+                <div class="course-card-footer">
+                    <span>created on: {{ course.created_at }}</span>
+                    <a href="#"> Enroll </a>
+                </div>
+            </div>
+            {% endfor %}
+            
+        {% else %}
+            <p>There are no available courses.</p>
+        {% endif %}
+    </div>        
+</div>
+{% endif %}
 <script src="{{ url_for('static', filename='script/course.js') }}"></script>
 {% endblock %}

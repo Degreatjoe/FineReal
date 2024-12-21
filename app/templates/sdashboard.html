@@ -1,6 +1,6 @@
-{% extend 'base.html' %}
+{% extends 'base.html' %}
 
-{% block nav-links %}
+{% block nav_links %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
@@ -19,17 +19,27 @@
     <h1>Welcome, {{ user.last_name }}!</h1>
 </div>
 <section class="courses">
-    {% for course in courses %}
-        <div class="course-card">
-            <h3>{{ course.title }}</h3>
-            <p>{{ course.description }}</p>
-            <div class="course-card-footer">
-                <span>Last created on: {{ course.created_at }}</span>
-                <a href="#"> Enroll </a>
-            </div>
-        </div>
-    {% else %}
-        <p>No courses available. Click "Create Course" to get started!</p>
-    {% endfor %}
-    </section>
+    <div>
+        <h1>Available Courses</h1>
+        <div class="published-grid">
+            {% if p_courses %}
+                
+                {% for course in p_courses %}
+                <div class="course-card">
+                    <h3>{{ course.title }}</h3>
+                    <p>{{ course.description }}</p>
+                    <p>Status: {{course.status}}</p>
+                    <div class="course-card-footer">
+                        <span>Last created on: {{ course.created_at }}</span>
+                        <a href="#"> Enroll </a>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            {% else %}
+                <p>There are no available courses.</p>
+            {% endif %}
+        </div>        
+    </div>
+</section>
 {% endblock %}
