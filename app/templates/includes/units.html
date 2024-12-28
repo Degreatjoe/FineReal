@@ -1,0 +1,11 @@
+{% if module.units %}
+    {% for unit in module.units %}
+        <div class="panel">
+            <li>{{unit.title}}</li>
+        </div>
+    {% endfor %}
+    {% else %}
+        <div class="panel">
+            <p>Lorem ipsum...</p>
+        </div>
+{% endif %}

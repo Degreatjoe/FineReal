@@ -1,32 +1,10 @@
 {% extends 'base.html' %}
 
-{% block nav_links %}
-<!-- Font Awesome CDN link -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
-{% if user.role == "Teacher" %}
-<ul>
-    <li><a href="{{url_for('teacher_dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-    <li><a href="{{url_for('course')}}"><i class="fas fa-book"></i> Courses</a></li>
-    <li><a href="#"><i class="fas fa-users"></i> Students</a></li>
-    <li><a href="#"><i class="fas fa-file-alt"></i> Assignments</a></li>
-    <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
-    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
-</ul>
-{% else %}
-<ul>
-    <li><a href="{{url_for('student_dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-    <li><a href="{{url_for('course')}}"><i class="fas fa-book"></i> Courses</a></li>
-    <li><a href="#"><i class="fas fa-users"></i> Students</a></li>
-    <li><a href="#"><i class="fas fa-file-alt"></i> Assignments</a></li>
-    <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
-    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
-</ul>
-{% endif %}
-{% endblock %}
-
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/course.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/modal_form.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/modal.css') }}">
+
 
 {% if user.role == 'Teacher' %}
 <button onclick="openModal()" class="open-btn">&plus;</button>
@@ -110,7 +88,7 @@
                 <option value="Archived">Archived</option>
             </select>
 
-            <button type="submit" class="btn btn-primary form-btn">Create Course</button>
+            <button type="submit" class="btn btn-primary form-btn modal_button">Create Course</button>
         </form>
     </div>
 </section>
@@ -121,6 +99,7 @@
         {% if courses %}
             
             {% for course in courses %}
+            <a href="{{url_for('course_view', course_id=course.id)}}">
             <div class="course-card">
                 <h3>{{ course.title }}</h3>
                 <p>{{ course.description }}</p>
@@ -130,6 +109,7 @@
                     <a href="#"> Enroll </a>
                 </div>
             </div>
+            </a>
             {% endfor %}
             
         {% else %}

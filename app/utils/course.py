@@ -11,7 +11,7 @@ from app.models.course import *
 
 def index_course():
     # If the user is not logged in, return all published courses
-    courses = Course.query.filter_by(status="Published").all()
+    courses = Courses.query.filter_by(status="Published").all()
     return courses
 
 def published_course():
@@ -20,7 +20,7 @@ def published_course():
     """
     if current_user.is_authenticated:
         # Query for courses with status 'draft' taught by the current user
-        courses = Course.query.filter_by(teacher_id=current_user.id, status='Published').all()
+        courses = Courses.query.filter_by(teacher_id=current_user.id, status='Published').all()
         return courses
 
 
@@ -30,13 +30,16 @@ def draft_course():
     """
     if current_user.is_authenticated:
         # Query for courses with status 'draft' taught by the current user
-        courses = Course.query.filter_by(teacher_id=current_user.id, status='Draft').all()
+        courses = Courses.query.filter_by(teacher_id=current_user.id, status='Draft').all()
         return courses
 
 
-def get_module(course_id):
-    modules = Module.query.filter_by(course_id=course_id).all()
+def get_modules(course_id):
+    # Fetch modules and their associated units in one query to avoid N+1 queries
+    # modules = Modules.query.options(db.joinedload(Modules.units)).filter_by(course_id=course_id).all()
+    modules= Modules.query.filter_by(course_id=course_id)
     return modules
 
 def get_unit(module_id):
-    units = Unit.query.filter_by(module_id=module_id)
+    units = Units.query.filter_by(module_id=module_id).all()
+    return units

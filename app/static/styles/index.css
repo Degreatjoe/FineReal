@@ -49,7 +49,7 @@ ul {
 .cta-button {
     display: inline-block; /* Make the link look like a button */
     padding: 10px 20px; /* Padding for the button */
-    background-color: #007BFF; /* Button color */
+    background-color: #2c3e50; /* Button color */
     color: #fff; /* Text color */
     text-decoration: none; /* Remove underline */
     border-radius: 5px; /* Rounded corners */
@@ -57,7 +57,7 @@ ul {
 }
 
 .cta-button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    background-color: #375270; /* Darker shade on hover */
 }
 
 .logo img {
@@ -112,12 +112,6 @@ ul {
     cursor: pointer;
     margin-top: 20px;
 }
-
-/* main {
-    margin-left: 220px; /* Space for the navbar */
-    /* padding: 20px;
-    flex-grow: 1;
-} */
 
 footer {
     background-color: #f8f8f8;
@@ -193,7 +187,7 @@ footer {
 }
 
 .course-card-footer a {
-    background-color: #007BFF; /* Button color */
+    background-color: #2c3e50; /* Button color */
     color: #fff; /* Text color */
     padding: 8px 12px; /* Padding for the button */
     text-decoration: none; /* Remove underline */
@@ -202,30 +196,10 @@ footer {
 }
 
 .course-card-footer a:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    background-color: #375270; /* Darker shade on hover */
 }
 
 @media (max-width: 768px) {
-    /* .navbar {
-        margin-top: 80px;
-        width: 50%;
-        max-height: 500px;
-        height: 70%;
-        position: absolute;
-        transform: translateX(-100%);
-    }
-
-    .menu-btn {
-        margin-top: 80px;
-        display: flex;
-    } */
-
-    /* main {
-        width: 780px;
-        margin-top: 0;
-        margin-left: 0; /* No space for navbar on mobile 
-    } */
-
     main {
         margin-top: 70px; /* Space for the fixed header */
         padding: 20px;

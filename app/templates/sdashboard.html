@@ -1,22 +1,7 @@
 {% extends 'base.html' %}
 
-{% block nav_links %}
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
-<ul>
-    <li><a href="{{url_for('student_dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-    <li><a href="{{url_for('course')}}"><i class="fas fa-book"></i> Courses</a></li>
-    <li><a href="#"><i class="fas fa-users"></i> Students</a></li>
-    <li><a href="#"><i class="fas fa-file-alt"></i> Assignments</a></li>
-    <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
-    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
-</ul>
-{% endblock %}
-
 {% block content %}
+
 <div class="heading">
     <h1>Welcome, {{ user.last_name }}!</h1>
 </div>

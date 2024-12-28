@@ -1,74 +1,131 @@
 {% extends 'base.html' %}
 
-{% block nav_links %}
-<!-- Font Awesome CDN link -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
-{% if user.role == "Teacher" %}
-<ul>
-    <li><a href="{{url_for('teacher_dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-    <li><a href="{{url_for('course')}}"><i class="fas fa-book"></i> Courses</a></li>
-    <li><a href="#"><i class="fas fa-users"></i> Students</a></li>
-    <li><a href="#"><i class="fas fa-file-alt"></i> Assignments</a></li>
-    <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
-    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
-</ul>
-{% else %}
-<ul>
-    <li><a href="{{url_for('student_dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-    <li><a href="{{url_for('course')}}"><i class="fas fa-book"></i> Courses</a></li>
-    <li><a href="#"><i class="fas fa-users"></i> Students</a></li>
-    <li><a href="#"><i class="fas fa-file-alt"></i> Assignments</a></li>
-    <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
-    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
-</ul>
-{% endif %}
-{% endblock %}
-
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/modules.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/modal.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/modal_form.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/course.css') }}">
 
-{% if user.role == "Teacher" %}
-<h1> {{ course.title }}</h1>
+    {% if user.role == "Teacher" %}
+        <h1> {{ course.title }}</h1>
 
-<button class="tablink" onclick="openPage('Home', this, 'darkgoldenrod')" id="defaultOpen">Manage</button>
-<button class="tablink" onclick="openPage('News', this, 'darkgoldenrod')">Settings</button>
-<button onclick="openModal()" class="open-btn">&plus;</button>
+        <button class="tablink" onclick="openPage('Home', this, 'darkgoldenrod')" id="defaultOpen">Manage</button>
+        <button class="tablink" onclick="openPage('News', this, 'darkgoldenrod')">Settings</button>
+        <button onclick="opencourseForm()" class="open-btn">&plus;</button>
 
-<div id="Home" class="tabcontent">
-    {% if modules %}
+        <div id="Home" class="tabcontent">
+            {% if modules %}
                 
-    {% for module in modules %}
-    <div class="module-card">
-        <h3>{{ module.title }}</h3>
-        <a href="{{url_for('course_view', course_id=course.id)}}"> edit </a>
-    </div>
-    {% endfor %}
-    
-{% else %}
-    <p>You can add modules by clicking on the plus icon above.</p>
-{% endif %}
-        
-</div>
+            {% for module in modules %}
+            <div class="module-card">
+                <div class="accordion-container">
+                    <button class="accordion">{{ module.title }}</button>
+                    <button class="add-u" onclick="openContent(this)" data="{{ module.id }}">&plus;</button>
+                </div>
+                {% if module.units %}
+                    {% for unit in module.units %}
+                        <a href="{{url_for('content_page', unit_id=unit.id)}}">
+                            <div class="panel">
+                                <li>{{ unit.title }}</li>
+                            </div>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <div class="panel">
+                        <p>No units available for this module.</p>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- Modal Structure -->
+            <section id="contentModal" class="modal">
+                <div class="modal_content">
+                    <button type="button" onclick="closeModals()" class="close-btn">&times;</button>
+                    <h2>Create Educational Content</h2>
+                    <form id="contentForm" action="{{ url_for('add_unit', course_id=course.id, module_id=module.id) }}" method="POST" enctype="multipart/form-data">
+                        <label for="title">Title</label>
+                        <input type="text" placeholder="Enter title" name="title" required>
+                        <label for="id">Module ID</label>
+                        <input type="text" value="{{ module.id }}" name="id" readonly>
+                        <label for="content_type">Content Type:</label>
+                        <select id="content_type" name="content_type" required onchange="toggleContentOptions()">
+                            <option value="page">Page</option>
+                            <option value="video">Video</option>
+                        </select>
+            
+                        <!-- For Page Content -->
+                        <div id="pageOptions" class="hidden">
+                            <p>Select "Page" to create a content page.</p>
+                        </div>
+            
+                        <!-- For Video Content -->
+                        <div id="videoOptions" class="hidden">
+                            <label for="video_file">Upload Video:</label>
+                            <input type="file" id="video_file" name="video_file" accept="video/*" />
+                        </div>
+            
+                        <button type="submit" class="modal_button">Save Content</button>
+                    </form>
+                </div>
+            </section>
+            {% endfor %}
 
-<div id="News" class="tabcontent">
-  <h3>News</h3>
-  <p>Some news this fine day!</p>
-</div>
+        {% else %}
+            <p>You can add modules by clicking on the plus icon above.</p>
+        {% endif %}
 
-<section class="modal">
-    <div class="modal_content">
-        <button type="button" onclick="closeCourse()" class="close-btn">&times;</button>
-        <form action="{{url_for('course_view', course_id=course.id)}}" method="POST">
-            <label for="title" class="form-label">Course Title</label>
-            <input type="text" id="title" name="title" required placeholder="Enter the module title">
+        </div>
 
-            <button type="submit" class="btn btn-primary form-btn">New Model</button>
-        </form>
-    </div>
-</section>
+        <div id="News" class="tabcontent">
+          <h3>News</h3>
+          <p>Some news this fine day!</p>
+        </div>
 
-{% else %}
-{% endif %}
-<script src="{{ url_for('static', filename='script/course.js') }}"></script>
+        <section id="modals-Content" class="modal">
+            <div class="modal_content" >
+                <button type="button" onclick="closeCourse()" class="close-btn">&times;</button>
+                <h2>Add New Module</h2>
+                <form action="{{url_for('course_view', course_id=course.id)}}" method="POST">
+                    <label for="title" class="form-label">Module Title</label>
+                    <input type="text" id="title" name="title" required placeholder="Enter the module title">
+                
+                    <button type="submit" class="btn btn-primary form-btn modal_button">New Model</button>
+                </form>
+            </div>
+        </section>
+
+    {% else %}
+    <h1> {{ course.title }}</h1>
+
+        <div id="" class="">
+            {% if modules %}
+                
+            {% for module in modules %}
+            <div class="module-card">
+                <div class="accordion-container">
+                    <button class="accordion">{{ module.title }}</button>
+                </div>
+                {% if module.units %}
+                    {% for unit in module.units %}
+                        <a href="{{url_for('content_page', unit_id=unit.id)}}">
+                            <div class="panel">
+                                <li>{{ unit.title }}</li>
+                            </div>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <div class="panel">
+                        <p>No units available for this module.</p>
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+        {% else %}
+            <p>You can add modules by clicking on the plus icon above.</p>
+        {% endif %}
+        </div>
+    {% endif %}
+    <script src="{{ url_for('static', filename='script/modules.js') }}"></script>
+    <script src="{{ url_for('static', filename='script/course.js') }}"></script>
 {% endblock %}

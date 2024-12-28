@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/content.css') }}">
+
+    {% if user.role == 'Teacher' %}
+        <div class="page-content">
+            <h1>{{ unit.title }}</h1>
+            {% if unit.content_type == 'page' %}
+                <button><a href="{{url_for('add_content', unit_id=unit.id)}}">edit</a></button>
+                <p>{{ unit.content_data }}</p>
+            {% elif unit.content_type == 'video' %}
+                <div class="video-content">
+                    <video width="100%" controls>
+                        <source src="{{ url_for('uploaded_file', filename=unit.content_data.split('/')[-1]) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div>
+
+                    </div>                    
+                </div>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="page-content">
+            {% if unit.content_type == 'page' %}
+                <p>{{ unit.content_data }}</p>
+            {% elif unit.content_type == 'video' %}
+                <div class="video-content">
+                    <video width="60%" controls>
+                        <source src="{{ url_for('uploaded_file', filename=unit.content_data.split('/')[-1]) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>                    
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+    
+    <script src="../static/script/content.js"></script>
+{% endblock %}

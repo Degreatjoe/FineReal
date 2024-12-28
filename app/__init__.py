@@ -19,6 +19,8 @@ login_manager.login_view = 'login'
 
 #the configuration for the app
 app.config.from_object(Config)
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
 # database initialization
 db = SQLAlchemy()

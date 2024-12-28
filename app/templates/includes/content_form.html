@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/modal.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/modal_form.css') }}">
+<script src="{{ url_for('static', filename='script/modules.js') }}"></script>
+
+
+<form id="contentForm{{ module.id }}" action="{{ url_for('add_unit', course_id=course.id, module_id=module.id) }}" method="POST" enctype="multipart/form-data">
+      <label for="title">Title</label>
+      <input type="text" placeholder="Enter title" name="title" required>
+      <label for="id">course id</label>
+      <input type="text" value="{{modules.id}}" name="id">
+      <label for="content_type">Content Type:</label>
+      <select id="content_type" name="content_type" required onchange="toggleContentOptions()">
+          <option value="page">Page</option>
+          <option value="video">Video</option>
+      </select>
+  
+      <!-- For Page Content -->
+      <div id="pageOptions" class="hidden">
+          <p>Select "Page" to create a content page.</p>
+      </div>
+  
+      <!-- For Video Content -->
+      <div id="videoOptions" class="hidden">
+          <label for="video_file">Upload Video:</label>
+          <input type="file" id="video_file" name="video_file" accept="video/*" />
+      </div>
+  
+      <button type="submit" class="modal_button">Save Content</button>
+</form>

@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <title>Base file</title>
 </head>
@@ -27,7 +31,11 @@
 <!-- Profile on the right -->
 <div class="right-links">
     <div class="user" onclick="extend()">
+        {% if user.photo %}
+        <img src="{{ url_for('uploaded_file', filename=user.photo) }}" alt="Profile Photo" class="photo">
+        {% else %}
         <img src="https://via.placeholder.com/40" alt="User Avatar" class="user-avatar">
+        {% endif %}
     </div>
 </div>
 
@@ -49,8 +57,7 @@
     <div class="container">
         <aside class="sidebar">
             <nav class="sidebar-nav">
-                {% block nav_links %}
-                {% endblock %}
+                {% include 'includes/nav.html' %}
             </nav>
         </aside>
         <main class="main-content">
@@ -70,7 +77,8 @@
             <p>&copy; 2025 FineReal. All rights reserved.</p>
         </div>
     </footer>
-    <script src="{{ url_for('static', filename='script/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='script/header.js') }}"></script>
+    <script src="{{ url_for('static', filename='script/menu.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

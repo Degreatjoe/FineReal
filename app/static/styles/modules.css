@@ -1,0 +1,52 @@
+.accordion-container {
+    display: flex;
+    align-items: center;
+}
+
+.accordion {
+  background-color:#2c3e50;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 98%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  margin: 5px;
+}
+.active, .accordion:hover {
+  background-color: #374c60;
+}
+
+.panel{
+    width: 90%;
+    padding: 5px 18px;
+    background-color: darkgoldenrod;
+    color: white;
+    display: none;
+    overflow: hidden;
+    margin: 0 12px 5px 10px;
+    cursor: pointer;
+}
+
+.add-u {
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 18px;
+  width: 40px;
+  height: 40px;
+  margin: 10px 0 5px 0;
+  cursor: pointer;
+  position:static;
+}
+.add-u:hover{
+  background-color: darkgoldenrod;
+}
+.add-u a {
+  text-decoration: none;
+  color: inherit;
+}
+

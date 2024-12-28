@@ -1,0 +1,13 @@
+.video-content {
+    display: grid;
+    justify-content:flex-start;  
+    align-items: start;       /* Aligns the video at the top of the container */
+    padding-bottom: 20px;     /* Adds space at the bottom of the video content */
+    margin-top: 20px;         /* Adds some space on top if needed */
+}
+
+.video-content video {
+    width: 100%;           /* Ensures the video takes no more than 80% of the available width */
+    height: auto;             /* Maintains the aspect ratio of the video */
+    margin-bottom: 20px;      /* Adds space below the video */
+}

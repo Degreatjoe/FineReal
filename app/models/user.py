@@ -17,14 +17,14 @@ class User(BaseModel, db.Model, UserMixin):
     role = db.Column(db.String, nullable=False)
 
     # Relationships
-    courses_taught = db.relationship('Course', backref='teacher', lazy=True)
-    enrolled_courses = db.relationship('Enrollment', backref='student', lazy=True)
+    courses_taught = db.relationship('Courses', backref='teacher', lazy=True)
+    enrolled_courses = db.relationship('Enrollments', backref='student', lazy=True)
 
     def __repr__(self):
         return f'<User  {self.username}>'
 
 # Import Course here to avoid circular imports
-from app.models.course import Course
+from app.models.course import *
 
 @login_manager.user_loader
 def load_user(user_id):

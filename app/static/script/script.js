@@ -1,18 +1,3 @@
-// for the user icon open
-function extend() {
-  document.getElementById("user_info").style.display = "block";
-}
-//  for user-icon close
-function closeModal() {
-  document.getElementById("user_info").style.display = "none";
-}
-
-
-// for navigation
-function toggleMenu() {
-    const sidebar = document.querySelector('.sidebar');
-    sidebar.classList.toggle('active');
-}
 
 
 // for signup password checking

@@ -8,11 +8,15 @@ from flask_login import login_required, current_user
 from app.models.user import User
 from app.models.course import *
 from app.utils.course import *
+from app.routes.unit import *
 
 
 @app.route('/course', methods=['GET', 'POST'])
 @login_required
 def course():
+    """
+    this fuction displays the courses on the courses screen
+    """
     if request.method == 'POST':
         title = request.form['title']
         description = request.form['description']
@@ -22,7 +26,7 @@ def course():
         status = request.form.get('status', 'Draft')
         teacher_id = current_user.id
 
-        new_course = Course(
+        new_course = Courses(
             title=title,
             description=description,
             category=category,
@@ -46,21 +50,37 @@ def course():
                            p_courses=p_course,
                            courses= courses)
 
-@app.route('/course/<course_id>', methods=["GET", "POST"])
+@app.route('/course/<course_id>', methods=["GET", 'POST'])
 @login_required
-def course_view( course_id):
-    if request.method == "POST":
-        title = request.form.get("title")
-        course_id = course_id
-        new_module = Module(title = title, course_id=course_id)
-        db.session.add(new_module)
-        db.session.commit()
+def course_view(course_id):
+    """
+    Displays the course management screen for the given course ID.
+    """
+    if request.method == 'POST':
+        title= request.form.get('title')
+        courses_id = course_id
+        if not title and not courses_id:
+            print("All field must be filled!")
+            flash("All fields must be filled!", "error")
+            return redirect(url_for('course_view', course_id=course_id))
+        new_module= Modules(title=title, course_id=course_id)
+        new_module.save()
+        print("successfully added!")
         return redirect(url_for('course_view', course_id=course_id))
 
-    v_course =  Course.query.get(course_id)
-    modules= get_module(course_id=course_id)
-    return render_template("course_view.html", course=v_course, user=current_user, modules= modules)
+    # Fetch the course
+    v_course = Courses.query.get_or_404(course_id)
+    modules = Modules.query.filter_by(course_id=course_id).all()
 
-@app.route('/<course_id>/models/', methods=["GET", "POST"])
-def model_view():
-    pass
+    # Debugging: Print modules and units
+    for module in modules:
+        modules = Modules.query.filter_by(course_id=course_id).all()
+        print(f"Module: {module.title}")
+        print(f"Units: {[unit.title for unit in module.units]}")
+
+    return render_template(
+        "course_view.html",
+        course=v_course,
+        user=current_user,
+        modules=modules
+    )
