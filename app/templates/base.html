@@ -42,7 +42,11 @@
 <div id="user_info" class="user_info">
     <span class="close-btn" onclick="closeModal()">&times;</span>
     <div class="profile-header">
-        <img src="https://via.placeholder.com/80" alt="User Avatar" class="user-avatar-large">
+        {% if user.photo %}
+        <img src="{{ url_for('uploaded_file', filename=user.photo) }}" alt="Profile Photo" class="user-avatar-large">
+        {% else %}
+        <img src="https://via.placeholder.com/40" alt="User Avatar" class="user-avatar-large">
+        {% endif %}
         <h3 class="user-greeting">Hi, {{ user.username | capitalize }}!</h3>
         <p class="user-email">{{ user.email }}</p>
     </div>

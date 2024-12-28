@@ -1,4 +1,4 @@
-# models/user.py
+#!/usr/bin/env python3
 from app import db, login_manager
 from flask_login import UserMixin
 from app.models.base import BaseModel
@@ -6,6 +6,7 @@ from app.models.base import BaseModel
 class User(BaseModel, db.Model, UserMixin):
     __tablename__ = 'users'
 
+    photo = db.Column(db.Text)
     first_name = db.Column(db.String(80), nullable=False)
     middle_name = db.Column(db.String(80), nullable=True)
     last_name = db.Column(db.String(80), nullable=False)

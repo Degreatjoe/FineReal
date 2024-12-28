@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
 this module contains all my configuration settings
 which my app would need to run
@@ -21,4 +21,4 @@ class Config:
 
     # files
     UPLOAD_FOLDER= os.getenv('UPLOAD_FOLDER', os.path.join(os.getcwd(), 'uploads'))
-    ALLOWED_EXTENSIONS =os.getenv('ALLOWED_EXTENSION', {'mp4', 'mov', 'avi', 'mkv', "png", "jpg"})
+    ALLOWED_EXTENSIONS =os.getenv('ALLOWED_EXTENSION', {'mp4', 'mov', 'avi', 'mkv', "png", "jpg", "jpeg", "gif"})

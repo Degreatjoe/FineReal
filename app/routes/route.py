@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
 this module is going to contain all my routes
 """
@@ -156,6 +156,9 @@ def login():
             return redirect(url_for('login'))
     return render_template('login.html')
 
+@app.route('/change_password')
+def change_password():
+    return "Still under implementation"
 
 @app.route('/logout')
 def logout():
@@ -178,3 +181,39 @@ def Profile(user_id):
         return redirect(url_for('index'))
 
     return render_template('profile.html', user=user)
+
+@app.route('/edit_profile', methods=["GET", "POST"])
+@login_required
+def edit_profile():
+    if request.method == "POST":
+        # Get updated user data from the form
+        first_name = request.form.get('first_name')
+        middle_name = request.form.get('middle_name')
+        last_name = request.form.get('last_name')
+        dob = request.form.get('dob')
+
+        # Handle profile photo upload
+        photo_file = request.files.get('photo')
+        if photo_file and allowed_file(photo_file.filename):
+            filename = secure_filename(photo_file.filename)
+            photo_path = filename  # Just save the filename, not the full absolute path
+            photo_file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+        else:
+            photo_path = current_user.photo  # Keep the current photo if no new photo is uploaded
+
+        # Update user information in the database
+        current_user.first_name = first_name
+        current_user.middle_name = middle_name
+        current_user.last_name = last_name
+        current_user.dob = dob
+        current_user.photo = photo_path  # Update photo path if a new photo was uploaded
+        current_user.updated_at = datetime.utcnow()  # Update the timestamp
+
+        # Commit the changes
+        db.session.commit()
+
+        flash("Profile updated successfully!", "success")
+        return redirect(url_for('Profile', user_id=current_user.id))  # Redirect to profile page after update
+
+    # Render the form with the current user's details
+    return render_template('edit_proofile.html', user=current_user)

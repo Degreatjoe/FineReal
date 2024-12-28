@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
 this is the file that runs the auth app
 you run the app by executing './run.py'

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
 This contains the routes for the teacher's dashboard.
 """

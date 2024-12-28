@@ -2,13 +2,14 @@
 
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/profile.css') }}">
+<a href="{{ url_for('dashboard') }}" class="btn btn-link">Back to Dashboard</a>
 
 <div class="profile-container">
     <div class="profile-header">
         <div class="profile-picture">
             <!-- Display the user's photo or use a placeholder if none is available -->
             {% if user.photo %}
-                <img src="{{ url_for('uploaded_file', filename=user.photo) }}" alt="Profile Photo" class="photo">
+                <img src="{{ url_for('uploaded_file', filename=user.photo) }}" alt="Profile Photo" class="user-avatar-large">
             {% else %}
                 <img src="https://via.placeholder.com/150" alt="Profile Photo" class="photo">
             {% endif %}
@@ -27,9 +28,7 @@
 
     <div class="profile-actions">
         <!-- Actions to edit profile and change password -->
-        <a href="#"  class="btn btn-primary">Edit Profile</a>
-        <a href="#" class="btn btn-secondary">Change Password</a>
-        <a href="#" class="btn btn-link">Back to Dashboard</a>
+        <a href="{{ url_for('edit_profile') }}" class="btn btn-primary">Edit Profile</a>
+        <a href="{{ url_for('change_password') }}" class="btn btn-secondary">Change Password</a>
     </div>
-</div>
-{% endblock %}
+    {% endblock %}

@@ -75,12 +75,29 @@ header .left{
     margin-bottom: 20px;
 }
 
+/* Style for the small profile photo in the header */
+.photo,
+.user-avatar {
+    width: 40px;  /* Set the desired width */
+    height: 40px;  /* Set the desired height */
+    border-radius: 50%;  /* Make it circular */
+    object-fit: cover;  /* Ensure the image fills the space without stretching */
+}
+
+/* Style for the larger profile photo in the modal */
 .user-avatar-large {
+    width: 80px;  /* Set the desired width */
+    height: 80px;  /* Set the desired height */
+    border-radius: 50%;  /* Make it circular */
+    object-fit: cover;  /* Ensure the image fills the space without stretching */
+}
+
+/* .user-avatar-large {
     width: 80px;
     height: 80px;
     border-radius: 50%;
     margin-bottom: 10px;
-}
+} */
 
 .user-greeting {
     font-size: 20px;
