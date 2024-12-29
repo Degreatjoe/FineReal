@@ -1,0 +1,55 @@
+/* Style for Floating Flash Messages */
+.flash-messages {
+    position: fixed;
+    top: 100px; /* Distance from the top of the screen */
+    left: 30%;
+    transform: translateX(-50%); /* Centers the message horizontally */
+    z-index: 9999; /* Ensures the message appears above other content */
+    padding: 20px 40px;
+    border-radius: 8px;
+    color: rgb(242, 248, 252);
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0; /* Initially hidden */
+    animation: slideIn 0.5s ease-in-out forwards, fadeOut 3s 4s forwards;
+}
+
+/* Animation for showing the flash message */
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Animation for fading out the flash message */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-30px);
+    }
+}
+
+/* Customize different types of messages */
+.flash-message.success {
+    background-color: #4CAF50; /* Green */
+    padding: 20px;
+}
+
+.flash-message.error {
+    background-color: #f44336; /* Red */
+    padding: 20px;
+}
+
+.flash-message.warning {
+    background-color: #ff9800; /* Orange */
+    padding: 20px;
+}

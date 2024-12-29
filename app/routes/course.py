@@ -72,15 +72,24 @@ def course_view(course_id):
     v_course = Courses.query.get_or_404(course_id)
     modules = Modules.query.filter_by(course_id=course_id).all()
 
-    # Debugging: Print modules and units
-    for module in modules:
-        modules = Modules.query.filter_by(course_id=course_id).all()
-        print(f"Module: {module.title}")
-        print(f"Units: {[unit.title for unit in module.units]}")
-
     return render_template(
         "course_view.html",
         course=v_course,
         user=current_user,
         modules=modules
     )
+@app.route('/toggle_course_status<course_id>')
+def toggle_course_status(course_id):
+    courses= Courses.query.get_or_404(course_id)
+    if courses.status == 'Published':
+        courses.status = 'Draft'
+        db.session.commit()
+        print(f'status changed to {courses.status}')
+        flash(f"status changed to {courses.status}", "success")
+        return redirect(url_for('course_view', course_id=course_id))
+    else:
+        courses.status = 'Published'
+        db.session.commit()
+        print(f'status changed to {courses.status}')
+        flash(f"status changed to {courses.status}", "success")
+        return redirect(url_for('course_view', course_id=course_id))

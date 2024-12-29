@@ -9,6 +9,19 @@
     {% if user.role == "Teacher" %}
         <h1> {{ course.title }}</h1>
 
+       <!-- Toggle for course Published/Draft status -->
+        <label class="switch">
+            {% if course.status == "Published" %}
+            <a href="{{url_for('toggle_course_status', course_id=course.id)}}" class="published">
+                <button>{{ course.status }}</button>
+            </a>
+            {% else %}
+             <a href="{{url_for('toggle_course_status', course_id=course.id)}}" class="draft">
+                <button>{{ course.status }}</button>
+            </a>
+            {% endif %}
+        </label>
+        
         <button class="tablink" onclick="openPage('Home', this, 'darkgoldenrod')" id="defaultOpen">Manage</button>
         <button class="tablink" onclick="openPage('News', this, 'darkgoldenrod')">Settings</button>
         <button onclick="opencourseForm()" class="open-btn">&plus;</button>

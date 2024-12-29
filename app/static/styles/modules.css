@@ -18,7 +18,9 @@
 .active, .accordion:hover {
   background-color: #374c60;
 }
-
+a{
+  text-decoration: none;
+}
 .panel{
     width: 90%;
     padding: 5px 18px;
@@ -49,4 +51,87 @@
   text-decoration: none;
   color: inherit;
 }
+
+/* Style for the switch */
+.switch {
+  position: relative;
+  width: 60px;
+  height: 34px;
+  margin-left: auto; /* This makes it push to the right */
+  margin-right: 50px; /* Add some space to the right if needed */
+  display: flex; /* Enable flexbox */
+  justify-content: flex-end; /* Align to the right */
+  align-items: center; /* Vertically align the button */
+}
+/* Published Status Button */
+.published button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.published button:hover {
+  background-color: #45a049;
+}
+
+/* Draft Status Button */
+.draft button {
+  background-color: gray;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.draft button:hover {
+  background-color: #8e8e8e;
+}
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #4CAF50;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+  
+  .status-label {
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  
 
