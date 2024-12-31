@@ -73,11 +73,62 @@ for (let i = 0; i < acc.length; i++) {
     // Toggle the visibility of all panels
     for (let j = 0; j < panels.length; j++) {
       // Check if the panel is visible, then hide it, otherwise show it
-      if (panels[j].style.display === "block") {
+      if (panels[j].style.display === "flex") {
         panels[j].style.display = "none";
       } else {
-        panels[j].style.display = "block";
+        panels[j].style.display = "flex";
       }
     }
   });
+}
+
+// Function to toggle the visibility of the delete button
+function toggleDeleteButton() {
+  const selectedCheckboxes = document.querySelectorAll('.unit-checkbox:checked');
+  const deleteButton = document.querySelector('.delete-btn');
+
+  // Show the delete button if at least one checkbox is selected
+  if (selectedCheckboxes.length > 0) {
+      deleteButton.style.display = 'block';
+  } else {
+      deleteButton.style.display = 'none';
+  }
+}
+
+function deleteSelectedUnits() {
+  console.log('Delete button clicked');  // For debugging
+  var selectedUnits = [];
+  $("input[class='unit-checkbox']:checked").each(function() {
+      selectedUnits.push($(this).val());
+  });
+
+  if (selectedUnits.length > 0) {
+      console.log("Selected units:", selectedUnits);  // For debugging
+      $.ajax({
+          url: '/delete_units',
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify({
+              units: selectedUnits
+          }),
+          success: function(response) {
+              console.log('Response:', response);  // For debugging
+              if (response.success) {
+                  alert("Selected units deleted successfully.");
+                  selectedUnits.forEach(function(unitId) {
+                      $("#" + unitId).remove();  // Optionally, remove units from UI
+                  });
+                  // Refresh the page to show the updated state
+                  window.location.reload();  // Reload the page after successful deletion
+              } else {
+                  alert("Error deleting units: " + response.message);
+              }
+          },
+          error: function(xhr, status, error) {
+              alert("An error occurred: " + error);
+          }
+      });
+  } else {
+      alert("No units selected for deletion.");
+  }
 }

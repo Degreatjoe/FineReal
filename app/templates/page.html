@@ -1,57 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Page</title>
-    <link rel="stylesheet" href="../static/styles/content.css">
-    <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
-    <!-- <script src="https://cdn.tiny.cloud/1/la48zri5sshp8xlokboezlbbfmy3ijf64mt3peb1cz97o0om/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script> -->
-</head>
-<body>
-    <h1>Edit Content</h1>
-    <form method="POST" action="{{url_for('add_content', unit_id=unit.id)}}">
-        <input type="text" name="title" value="{{ unit.title}}" readonly>
-        <textarea name="content_data" id="editors" rows="50">
-            {{ unit.content_data }}
-        </textarea>
-        <div id="editor"></div>
-        <button type="submit">Save Content</button>
-    </form>
+{% extends 'base.html' %}
 
-    <!-- <script>
-      tinymce.init({
-        selector: 'textarea',
-        plugins: [
-          // Core editing features
-          'anchor', 'autolink', 'charmap', 'codesample', 'emoticons',
-          'image', 'link', 'lists', 'media', 'searchreplace', 'table',
-          'visualblocks', 'wordcount',
-          // Your account includes a free trial of TinyMCE premium features
-          // Try the most popular premium features until Jan 5, 2025:
-          'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter',
-          'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen',
-          'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate',
-          'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes',
-          'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown',
-          'importword', 'exportword', 'exportpdf'
-        ],
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-        tinycomments_mode: 'embedded',
-        tinycomments_author: 'Author name',
-        mergetags_list: [
-          { value: 'First.Name', title: 'First Name' },
-          { value: 'Email', title: 'Email' },
-        ],
-        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/content.css') }}">
+<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
+<!-- <script src="https://cdn.tiny.cloud/1/la48zri5sshp8xlokboezlbbfmy3ijf64mt3peb1cz97o0om/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script> -->
+<a href="{{url_for('content_page', unit_id=unit.id)}}" class="arrow"> &larr; back</a>
+
+<h1>Edit Content</h1>
+<form method="POST" action="{{url_for('add_content', unit_id=unit.id)}}">
+    <input type="text" name="title" value="{{ unit.title}}" readonly>
+    <textarea name="content_data" id="editors" rows="50">
+        {{ unit.content_data }}
+    </textarea>
+    <div id="editor"></div>
+    <button type="submit">Save Content</button>
+</form>
+<!-- <script>
+  tinymce.init({
+    selector: 'textarea',
+    plugins: [
+      // Core editing features
+      'anchor', 'autolink', 'charmap', 'codesample', 'emoticons',
+      'image', 'link', 'lists', 'media', 'searchreplace', 'table',
+      'visualblocks', 'wordcount',
+      'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter',
+      'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen',
+      'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate',
+      'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes',
+      'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown',
+      'importword', 'exportword', 'exportpdf'
+    ],
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    tinycomments_mode: 'embedded',
+    tinycomments_author: 'Author name',
+    mergetags_list: [
+      { value: 'First.Name', title: 'First Name' },
+      { value: 'Email', title: 'Email' },
+    ],
+    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+  });
+</script> -->
+<script>
+  // Initialize CKEditor on the textarea with id "content"
+  ClassicEditor
+      .create(document.querySelector('#editors'))
+      .catch(error => {
+          console.error(error);
       });
-    </script> -->
-    <script>
-      // Initialize CKEditor on the textarea with id "content"
-      ClassicEditor
-          .create(document.querySelector('#editors'))
-          .catch(error => {
-              console.error(error);
-          });
-  </script>
-</body>
-</html>
+</script>
+{% endblock %}

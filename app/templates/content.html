@@ -3,12 +3,16 @@
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/content.css') }}">
 
+<div class="page-content">
+    <a href="{{url_for('course_view', course_id=course.id)}}" class="arrow"> &larr; back</a>
+
     {% if user.role == 'Teacher' %}
-        <div class="page-content">
-            <h1>{{ unit.title }}</h1>
+    <div class="add_btn">
+        <h1>{{ unit.title }}</h1>
+        <button class="btn"><a href="{{url_for('add_content', unit_id=unit.id)}}">&#x270E;</a></button>
+    </div>
             {% if unit.content_type == 'page' %}
-                <button><a href="{{url_for('add_content', unit_id=unit.id)}}">edit</a></button>
-                <p>{{ unit.content_data }}</p>
+                <p>{{ unit.content_data | safe }}</p>
             {% elif unit.content_type == 'video' %}
                 <div class="video-content">
                     <video width="100%" controls>
@@ -24,7 +28,7 @@
     {% else %}
         <div class="page-content">
             {% if unit.content_type == 'page' %}
-                <p>{{ unit.content_data }}</p>
+                <p>{{ unit.content_data | safe }}</p>
             {% elif unit.content_type == 'video' %}
                 <div class="video-content">
                     <video width="60%" controls>

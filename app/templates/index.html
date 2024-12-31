@@ -47,10 +47,9 @@
                 <div class="course-card">
                     <h3>{{ course.title }}</h3>
                     <p>{{ course.description }}</p>
-                    <span>Teacher: {{ course.teacher_id }}</span>
                     <div class="course-card-footer">
-                        <span>created on: {{ course.created_at }}</span>
-                        <a href="#"> Enroll </a>
+                        <span>created on: {{ course.created_at.strftime('%B %d, %Y') }}</span>
+                        <a href="{{url_for('enroll', course_id=course.id)}}"> Enroll </a>
                     </div>
                 </div>
             {% else %}

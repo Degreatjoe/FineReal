@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/course.css') }}">
+
+<div class="course-card" id="course-{{ course.id }}">
+    <img src="https://via.placeholder.com/250x150" alt="course-image" class="course-image">
+    <h3>{{ course.title }}</h3>
+    <p>{{ course.description }}</p>
+    <p><strong>Difficulty:</strong> {{ course.difficulty }}</p>
+    <div class="course-card-footer">
+        <span>created on: {{ course.created_at.strftime('%B %d, %Y') }}</span>
+        {% if user.role == 'Teacher' %}
+            <a href="{{ url_for('course_view', course_id=course.id) }}">edit</a>
+        {% else %}
+            <!-- For students, check enrollment status -->
+            {% if enrolled_status[course.id] %}
+                <span class="enrolled-btn">Enrolled</span>
+            {% else %}
+                <a href="{{ url_for('enroll', course_id=course.id) }}" class="enroll-btn">Enroll</a>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>

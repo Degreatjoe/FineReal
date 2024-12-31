@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/modal_form.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/modal.css') }}">
 
-
 {% if user.role == 'Teacher' %}
 <button onclick="openModal()" class="open-btn">&plus;</button>
 <button onclick="" class="manage-btn">&Congruent;</button>
@@ -15,23 +14,12 @@
         <h1>Your Draft Courses</h1>
         <div class="draft-grid">
             {% if d_courses %}
-    
                 {% for course in d_courses %}
-                <div class="course-card">
-                    <h3>{{ course.title }}</h3>
-                    <p>{{ course.description }}</p>
-                    <p>Status: {{course.status}}</p>
-                    <div class="course-card-footer">
-                        <span>Last created on: {{ course.created_at }}</span>
-                        <a href="{{url_for('course_view', course_id=course.id)}}"> edit </a>
-                    </div>
-                </div>
+                    {% include 'includes/course_card.html' %}
                 {% endfor %}
-    
             {% else %}
                 <p>No draft courses found.</p>
             {% endif %}
-    
         </div>    
     </div>
 
@@ -39,19 +27,9 @@
         <h1>Your Published Courses</h1>
         <div class="published-grid">
             {% if p_courses %}
-                
                 {% for course in p_courses %}
-                <div class="course-card" id="course-{{ course.id }}">
-                    <h3>{{ course.title }}</h3>
-                    <p>{{ course.description }}</p>
-                    <p>Status: {{course.status}}</p>
-                    <div class="course-card-footer">
-                        <span>Last created on: {{ course.created_at }}</span>
-                        <a href="{{url_for('course_view', course_id=course.id)}}"> edit </a>
-                    </div>
-                </div>
+                    {% include 'includes/course_card.html' %}
                 {% endfor %}
-                
             {% else %}
                 <p>You haven't published any course yet.</p>
             {% endif %}
@@ -94,29 +72,29 @@
 </section>
 {% else %}
 <div>
-    <h1>Available Courses</h1>
-    <div class="published-grid">
-        {% if courses %}
-            
-            {% for course in courses %}
-            <a href="{{url_for('course_view', course_id=course.id)}}">
-            <div class="course-card">
-                <h3>{{ course.title }}</h3>
-                <p>{{ course.description }}</p>
-                <p>Status: {{course.status}}</p>
-                <div class="course-card-footer">
-                    <span>created on: {{ course.created_at }}</span>
-                    <a href="#"> Enroll </a>
-                </div>
+    <div>
+        <h1>Available Courses</h1>
+        <div class="published-grid">
+            {% if a_courses %}
+                {% for course in a_courses %}
+                    {% include 'includes/course_card.html' %}
+                {% endfor %}
+            {% else %}
+                <p>There are no available courses.</p>
+            {% endif %}
+
+            <h1>Enrolled Courses</h1>
+            <div class="published-grid">
+                {% if e_courses %}
+                    {% for course in e_courses %}
+                        {% include 'includes/course_card.html' %}
+                    {% endfor %}
+                {% else %}
+                    <p>You are not enrolled in any courses.</p>
+                {% endif %}
             </div>
-            </a>
-            {% endfor %}
-            
-        {% else %}
-            <p>There are no available courses.</p>
-        {% endif %}
-    </div>        
-</div>
+        </div>
+    </div>
 {% endif %}
 <script src="{{ url_for('static', filename='script/course.js') }}"></script>
 {% endblock %}

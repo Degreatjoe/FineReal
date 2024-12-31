@@ -11,3 +11,42 @@
     height: auto;             /* Maintains the aspect ratio of the video */
     margin-bottom: 20px;      /* Adds space below the video */
 }
+
+a{
+    text-decoration: none;
+}
+.add_btn{
+    display: flex;
+    justify-content: space-between;
+}
+.btn{
+    background-color: whitesmoke;
+    border-radius: 50%; /* Ensure the button remains circular */
+    padding: 0; /* Remove any extra padding to keep the size consistent */
+    width: 40px;
+    height: 40px;
+    display: flex; /* Enable flexbox */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    border: none; /* Optional: Remove the button border */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+.btn a{
+    font-size: 30px;
+    color: blue;
+}
+
+textarea{
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    overflow-y: auto;
+}
+.arrow{
+    font-size: 20px;
+    color: black;
+}

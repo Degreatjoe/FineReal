@@ -22,13 +22,45 @@ a{
   text-decoration: none;
 }
 .panel{
-    width: 90%;
+  display: none;
+  overflow: hidden;
+
+}
+.unit-checkbox{
+  width: 2%;
+  padding: 2px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.4rem;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  cursor: pointer;
+
+}
+
+.delete-btn {
+  display: none;  /* Hidden initially */
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+.main-panel{
+    width: 80%;
     padding: 5px 18px;
     background-color: darkgoldenrod;
     color: white;
-    display: none;
-    overflow: hidden;
-    margin: 0 12px 5px 10px;
+    margin: 0 12px 5px 4px;
     cursor: pointer;
 }
 
@@ -91,47 +123,61 @@ a{
   background-color: #8e8e8e;
 }
 
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: 0.4s;
-    border-radius: 34px;
-  }
-  
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    border-radius: 50%;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: 0.4s;
-  }
-  
-  input:checked + .slider {
-    background-color: #4CAF50;
-  }
-  
-  input:checked + .slider:before {
-    transform: translateX(26px);
-  }
-  
-  .status-label {
-    margin-left: 10px;
-    font-weight: bold;
-  }
-  
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
 
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #4CAF50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.status-label {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.three-dots {
+  /* background: none; */
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column; /* stack vertically */
+  align-items: center;
+  /* background-color: #898b8d; */
+}
+
+.dot {
+    font-size: 7px; /* Size of the dots */
+    margin: 0 3px; /* Space between the dots */
+    color: #000; /* Color of the dots */
+}

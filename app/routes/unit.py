@@ -3,7 +3,7 @@
 this file contains the routes related to coures
 """
 from app import app, db, allowed_file
-from flask import redirect, render_template, request, flash, url_for
+from flask import redirect, render_template, request, flash, url_for, jsonify
 from flask_login import login_required, current_user
 from app.models.user import User
 from app.models.course import *
@@ -58,28 +58,41 @@ def add_unit(course_id, module_id):
             return redirect(url_for('course_view', course_id=course_id))
         else:
             return "Not Authorized"
-    # if request.method == "POST":
-    #     title= request.form.get('title')
-    #     content_type= request.form.get("content_type")
-    #     content_data= request.form.get('content')
-    #     module_id= request.form.get("id")
-    #     new_unit = Units(title=title,
-    #                     content_type = content_type,
-    #                     content_data = content_data,
-    #                     module_id= module_id)
-    #     new_unit.save()
-    #     print("successfully added!")
-
-    #     return redirect(url_for('course_view', course_id=course_id))
-    
     units= get_unit(module_id=module_id)
     return render_template("units.html", units=units)
+
+@app.route('/delete_units', methods=['POST'])
+def delete_units():
+    # Get the list of unit IDs from the request
+    data = request.get_json()
+    unit_ids = data.get('units')
+
+    # Validate the input
+    if not unit_ids or not isinstance(unit_ids, list):
+        return jsonify({'success': False, 'message': 'Invalid or missing unit IDs.'}), 400
+
+    try:
+        # Deleting units from the database
+        units_to_delete = Units.query.filter(Units.id.in_(unit_ids)).all()
+        for unit in units_to_delete:
+            db.session.delete(unit)
+        
+        db.session.commit()  # Commit the deletion to the database
+
+        return jsonify({'success': True, 'message': 'Units deleted successfully.'})
+    except Exception as e:
+        db.session.rollback()  # Rollback in case of an error
+        return jsonify({'success': False, 'message': f'Error deleting units: {str(e)}'}), 500
 
 @app.route('/content_page/<unit_id>', methods=["GET", "POST"])
 @login_required
 def content_page(unit_id):
     unit= Units.query.get_or_404(unit_id)
-    return render_template("content.html", unit=unit, user=current_user)
+
+    # Get the module related to the unit, and then get the course related to that module
+    courses = unit.module.course  # Access the related course through the module
+
+    return render_template("content.html", unit=unit, course=courses, user=current_user)
 
 @app.route('/add_content/<unit_id>', methods=["GET", "POST"])
 @login_required
@@ -88,14 +101,14 @@ def add_content(unit_id):
 
     if request.method == "POST":
         # Get the updated content from the form
-        content_data = request.form.get('content')  # For "page" content type
-        
+        content_data = request.form.get('content_data')  # For "page" content type
+
         # Update the unit's attributes
         unit.content_data = content_data
-        
+
         # Commit the changes to the database
         db.session.commit()
         print('content data updated')
         return redirect(url_for('content_page', unit_id= unit_id))
-    return render_template('page.html', unit = unit)
+    return render_template('page.html', unit = unit, user=current_user)
 

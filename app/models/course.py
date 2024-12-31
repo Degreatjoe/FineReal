@@ -21,7 +21,7 @@ class Courses(BaseModel, db.Model):
     teacher_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     # Relationships
-    modules = db.relationship('Modules', backref='courses', lazy=True)
+    modules = db.relationship('Modules', backref='courses', lazy=True, overlaps="modules_list")
     enrolled_students = db.relationship('Enrollments', backref='courses', lazy=True)
 
 # Define other models like Module, Unit, Enrollment...
@@ -34,6 +34,10 @@ class Modules(BaseModel, db.Model):
 
     # One-to-many relationship to units
     units = db.relationship('Units', backref='module', lazy=True)
+
+        # Add a relationship to the Course
+    course = db.relationship('Courses', backref='modules_list', lazy=True, overlaps="modules")
+
 
 
 class Units(BaseModel, db.Model):
@@ -52,3 +56,6 @@ class Enrollments(BaseModel, db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'), nullable=False)
     enrollment_date = db.Column(db.DateTime, default=db.func.current_timestamp())
+
+    # Relationship with the User model
+    user = db.relationship('User', backref='enrollments', lazy=True)

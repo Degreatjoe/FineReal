@@ -17,18 +17,18 @@ def teacher_dashboard():
     d_courses= draft_course()
     return render_template('tdashboard.html', user=current_user, d_courses= d_courses)
 
-@app.route('/students')
-def students():
-    """
-    This fetches and displays all students enrolled in the teacher's courses.
-    """
-    # Placeholder list of students
-    students_list = [
-        {'id': 1, 'name': 'Student One'},
-        {'id': 2, 'name': 'Student Two'},
-        {'id': 3, 'name': 'Student Three'},
-    ]
-    return render_template('students.html', students=students_list)
+# @app.route('/students')
+# def students():
+#     """
+#     This fetches and displays all students enrolled in the teacher's courses.
+#     """
+#     # Placeholder list of students
+#     students_list = [
+#         {'id': 1, 'name': 'Student One'},
+#         {'id': 2, 'name': 'Student Two'},
+#         {'id': 3, 'name': 'Student Three'},
+#     ]
+#     return render_template('students.html', students=students_list)
 
 @app.route('/assignments')
 def assignments():

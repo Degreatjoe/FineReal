@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/modal_form.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/course.css') }}">
 
+<a href="{{url_for('course')}}" class="arrow"> &larr; back</a>
+
     {% if user.role == "Teacher" %}
         <h1> {{ course.title }}</h1>
 
@@ -25,6 +27,8 @@
         <button class="tablink" onclick="openPage('Home', this, 'darkgoldenrod')" id="defaultOpen">Manage</button>
         <button class="tablink" onclick="openPage('News', this, 'darkgoldenrod')">Settings</button>
         <button onclick="opencourseForm()" class="open-btn">&plus;</button>
+        <!-- Delete Selected Units Button (Initially Hidden) -->
+        <button class="delete-btn" onclick="deleteSelectedUnits()" style="display: none;">&#128465;</button>
 
         <div id="Home" class="tabcontent">
             {% if modules %}
@@ -34,17 +38,21 @@
                 <div class="accordion-container">
                     <button class="accordion">{{ module.title }}</button>
                     <button class="add-u" onclick="openContent(this)" data="{{ module.id }}">&plus;</button>
+                    <button class="add-u">
+                        <a href="{{url_for('delete_module', course_id=course.id, module_id=module.id)}}">&#128465;</a>
+                    </button>
                 </div>
                 {% if module.units %}
                     {% for unit in module.units %}
-                        <a href="{{url_for('content_page', unit_id=unit.id)}}">
-                            <div class="panel">
+                        <div class="panel" > 
+                            <input type="checkbox" class="unit-checkbox" value="{{ unit.id }}" style="display: block;" onchange="toggleDeleteButton()">
+                            <div class="main-panel" onclick="location.href='{{ url_for('content_page', unit_id=unit.id) }}'">
                                 <li>{{ unit.title }}</li>
                             </div>
-                        </a>
+                        </div>
                     {% endfor %}
                 {% else %}
-                    <div class="panel">
+                    <div class="main-panel">
                         <p>No units available for this module.</p>
                     </div>
                 {% endif %}
@@ -81,7 +89,7 @@
                     </form>
                 </div>
             </section>
-            {% endfor %}
+        {% endfor %}
 
         {% else %}
             <p>You can add modules by clicking on the plus icon above.</p>
@@ -120,15 +128,19 @@
                 </div>
                 {% if module.units %}
                     {% for unit in module.units %}
-                        <a href="{{url_for('content_page', unit_id=unit.id)}}">
-                            <div class="panel">
-                                <li>{{ unit.title }}</li>
-                            </div>
-                        </a>
+                    <div class="panel">
+                        <div class="main-panel">
+                            <a href="{{url_for('content_page', unit_id=unit.id)}}">
+                            <li>{{ unit.title }}</li>
+                            </a>
+                        </div>
+                    </div>
                     {% endfor %}
                 {% else %}
                     <div class="panel">
-                        <p>No units available for this module.</p>
+                        <div class="main-panel">
+                            <p>No units available for this module.</p>
+                        </div>
                     </div>
                 {% endif %}
             </div>
@@ -141,4 +153,5 @@
     {% endif %}
     <script src="{{ url_for('static', filename='script/modules.js') }}"></script>
     <script src="{{ url_for('static', filename='script/course.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 {% endblock %}

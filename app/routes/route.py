@@ -147,6 +147,7 @@ def login():
                 flash('Please verify your email before logging in.')
                 return redirect(url_for('login'))
             login_user(user)
+            flash(f'successful login {user.last_name}', 'success')
             return redirect(url_for('dashboard'))
         elif not user:
             flash('User does not exist. Please sign up.')
