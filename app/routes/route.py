@@ -11,6 +11,7 @@ from app.utils.user import User, add_new_user, set_username, send_verification_e
 from app.models.user import  PendingUser
 from app.utils.user import  confirm_verification_token, add_pending
 from app.routes.dashboard import *
+from app.routes.user_info import *
 from app.utils.course import *
 
 
@@ -157,10 +158,6 @@ def login():
             return redirect(url_for('login'))
     return render_template('login.html')
 
-@app.route('/change_password')
-def change_password():
-    return "Still under implementation"
-
 @app.route('/logout')
 def logout():
     """This function logs the user out"""
@@ -168,53 +165,3 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/<user_id>/profile')
-@login_required
-def Profile(user_id):
-    """
-    Displays the profile of the user with the given user_id.
-    """
-    # Fetch the user from the database
-    user = User.query.get(user_id)
-
-    if not user:
-        flash("User not found.")
-        return redirect(url_for('index'))
-
-    return render_template('profile.html', user=user)
-
-@app.route('/edit_profile', methods=["GET", "POST"])
-@login_required
-def edit_profile():
-    if request.method == "POST":
-        # Get updated user data from the form
-        first_name = request.form.get('first_name')
-        middle_name = request.form.get('middle_name')
-        last_name = request.form.get('last_name')
-        dob = request.form.get('dob')
-
-        # Handle profile photo upload
-        photo_file = request.files.get('photo')
-        if photo_file and allowed_file(photo_file.filename):
-            filename = secure_filename(photo_file.filename)
-            photo_path = filename  # Just save the filename, not the full absolute path
-            photo_file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-        else:
-            photo_path = current_user.photo  # Keep the current photo if no new photo is uploaded
-
-        # Update user information in the database
-        current_user.first_name = first_name
-        current_user.middle_name = middle_name
-        current_user.last_name = last_name
-        current_user.dob = dob
-        current_user.photo = photo_path  # Update photo path if a new photo was uploaded
-        current_user.updated_at = datetime.utcnow()  # Update the timestamp
-
-        # Commit the changes
-        db.session.commit()
-
-        flash("Profile updated successfully!", "success")
-        return redirect(url_for('Profile', user_id=current_user.id))  # Redirect to profile page after update
-
-    # Render the form with the current user's details
-    return render_template('edit_proofile.html', user=current_user)

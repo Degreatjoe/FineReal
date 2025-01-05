@@ -62,7 +62,6 @@ def course():
                            enrolled_status=enrolled_status)
 
 @app.route('/course/<course_id>', methods=["GET", 'POST'])
-@login_required
 def course_view(course_id):
     """
     Displays the course management screen for the given course ID.

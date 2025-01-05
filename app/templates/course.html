@@ -85,9 +85,11 @@
 
             <h1>Enrolled Courses</h1>
             <div class="published-grid">
-                {% if e_courses %}
+                    {% if e_courses %}
                     {% for course in e_courses %}
+                    <a href="{{ url_for('course_view', course_id=course.id) }}">
                         {% include 'includes/course_card.html' %}
+                    </a>
                     {% endfor %}
                 {% else %}
                     <p>You are not enrolled in any courses.</p>

@@ -26,6 +26,11 @@
             {% endif %}
         </div>
     {% else %}
+    {% if unit.status == 'In_Progress' %}
+    <a href="#"><input type="checkbox"> Mark as completed</a>
+    {% elif unit.status == 'Completed' %}
+    <a href="#">completed</a>
+    {% endif %}
         <div class="page-content">
             {% if unit.content_type == 'page' %}
                 <p>{{ unit.content_data | safe }}</p>

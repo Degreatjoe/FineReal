@@ -87,6 +87,7 @@ def delete_units():
 @app.route('/content_page/<unit_id>', methods=["GET", "POST"])
 @login_required
 def content_page(unit_id):
+    
     unit= Units.query.get_or_404(unit_id)
 
     # Get the module related to the unit, and then get the course related to that module

@@ -53,6 +53,7 @@
     <div class="profile-links">
         <a href="{{ url_for('Profile', user_id=current_user.id) }}" class="profile-link">Manage your Profile</a>
         <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+        <a href="{{url_for('login')}}">Login another account</a>
     </div>
 </div>
     </header>

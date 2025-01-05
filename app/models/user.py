@@ -18,8 +18,8 @@ class User(BaseModel, db.Model, UserMixin):
     role = db.Column(db.String, nullable=False)
 
     # Relationships
-    courses_taught = db.relationship('Courses', backref='teacher', lazy=True)
-    enrolled_courses = db.relationship('Enrollments', backref='student', lazy=True)
+    courses_taught = db.relationship('Courses', backref='teacher', lazy=True, overlaps="modules_list")
+    enrolled_courses = db.relationship('Enrollments', backref='student', lazy=True, overlaps="student,enrollments")
 
     def __repr__(self):
         return f'<User  {self.username}>'
