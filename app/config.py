@@ -7,7 +7,7 @@ import os
 
 
 class Config:
-    SECRET_KEY = os.getenv('SECRET_KEY', 'fghgfdcsertgfdr5676545678uygv')
+    SECRET_KEY = os.getenv('SECRET_KEY')
     SQLALCHEMY_DATABASE_URI= os.getenv("DATABASE_URI", "sqlite:///auth.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
