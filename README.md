@@ -76,9 +76,3 @@ We welcome contributions from the community to improve FineReal. To contribute:
 
 This project is licensed under the MIT License. See the `LICENSE` file for more details.
 
-## Contact
-
-For more information or support, please contact:
-
-- **Project Owner**: Jane Nyasoro ([GitHub Profile](https://github.com/janenyasoro))
-- **Email**: finereal-support@example.com
