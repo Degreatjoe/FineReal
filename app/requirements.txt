@@ -1,4 +1,3 @@
-alembic==1.14.0
 appdirs==1.4.4
 astroid==3.2.4
 attrs==21.2.0
@@ -29,9 +28,6 @@ flake8==7.1.1
 Flask==3.1.0
 Flask-Babel==2.0.0
 Flask-Cors==3.0.8
-Flask-Migrate==4.0.7
-Flask-SQLAlchemy==3.1.1
-greenlet==3.1.1
 gunicorn==23.0.0
 gyp==0.1
 httplib2==0.20.2
@@ -42,7 +38,7 @@ incremental==21.3.0
 isort==5.13.2
 itsdangerous==2.2.0
 jeepney==0.7.1
-Jinja2==3.1.5
+Jinja2==3.0.3
 jsonpatch==1.32
 jsonpointer==2.0
 jsonschema==3.2.0
@@ -50,7 +46,6 @@ keyring==23.5.0
 launchpadlib==1.10.16
 lazr.restfulclient==0.14.4
 lazr.uri==1.0.6
-Mako==1.3.8
 MarkupSafe==2.1.1
 mccabe==0.7.0
 more-itertools==8.10.0
@@ -85,7 +80,6 @@ requests==2.18.4
 SecretStorage==3.3.1
 service-identity==18.1.0
 six==1.16.0
-SQLAlchemy==2.0.37
 ssh-import-id==5.11
 systemd-python==234
 tomli==2.0.1
