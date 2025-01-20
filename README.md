@@ -24,13 +24,13 @@ FineReal is an online college platform designed to:
 - **Backend**: Django, Flask
 - **Database**: PostgreSQL, MongoDB
 - **Deployment**: AWS, Docker
-- **Version Control**: Git, GitHub ([FineReal Repository](https://github.com/janenyasoro/finereal))
+- **Version Control**: Git, GitHub ([FineReal Repository](https://github.com/Degreatjoe/FineReal))
 
 ## Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/janenyasoro/finereal.git
+   git clone https://github.com/Degreatjoe/FineReal.git
    ```
 2. Navigate to the project directory:
    ```bash
